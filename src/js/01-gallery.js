@@ -36,22 +36,20 @@ function onGalleryContainerClick(evt) {
 function basicLightBoxOpen(wayToImg) {
   const html = `<img width="1400" height="900" src="${wayToImg}">`;
 
-  const ligthboxLib = basicLightbox.create(html);
+  const ligthboxLib = basicLightbox.create(html, {
+    onShow: ligthboxLib => window.addEventListener('keydown', onEscKeyPress),
+    onClose: ligthboxLib =>
+      window.removeEventListener('keydown', onEscKeyPress),
+  });
 
   ligthboxLib.show();
-
-  window.addEventListener('keydown', onEscKeyPress);
 
   function onEscKeyPress(evt) {
     const ESC_KEY_CODE = 'Escape';
 
     if (evt.code === ESC_KEY_CODE) {
+      console.log(`Click on Esc`);
       ligthboxLib.close();
-      removeListener();
     }
-  }
-
-  function removeListener() {
-    window.removeEventListener('keydown', onEscKeyPress);
   }
 }
