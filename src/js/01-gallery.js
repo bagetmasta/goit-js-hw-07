@@ -48,7 +48,6 @@ function basicLightBoxOpen(wayToImg) {
     const ESC_KEY_CODE = 'Escape';
 
     if (evt.code === ESC_KEY_CODE) {
-      console.log(`Click on Esc`);
       ligthboxLib.close();
     }
   }
