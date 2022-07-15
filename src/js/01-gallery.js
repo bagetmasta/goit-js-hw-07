@@ -1,16 +1,11 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-const bodyRef = document.querySelector('body');
 const galleryContainer = document.querySelector('.gallery');
 const cardsMarkup = createCardsMarkup(galleryItems);
-// const forTest = document.querySelector('.basicLightbox--visible');
 
 galleryContainer.insertAdjacentHTML('beforeend', cardsMarkup);
-
 galleryContainer.addEventListener('click', onGalleryContainerClick);
-
-// galleryContainer.addEventListener('click', isModalOpen);
 
 function createCardsMarkup(cards) {
   return cards
@@ -36,37 +31,27 @@ function onGalleryContainerClick(evt) {
   const wayToImg = evt.target.dataset.source;
 
   basicLightBoxOpen(wayToImg);
-  // addSpecialClass();
-  // removeSpecialClass();
 }
 
 function basicLightBoxOpen(wayToImg) {
-  basicLightbox
-    .create(`<img width="1400" height="900" src="${wayToImg}">`)
-    .show();
+  const html = `<img width="1400" height="900" src="${wayToImg}">`;
 
-  addSpecialClass();
-  // const visible = basicLightbox.visible();
+  const ligthboxLib = basicLightbox.create(html);
 
-  // isActive(visible);
+  ligthboxLib.show();
+
+  window.addEventListener('keydown', onEscKeyPress);
+
+  function onEscKeyPress(evt) {
+    const ESC_KEY_CODE = 'Escape';
+
+    if (evt.code === ESC_KEY_CODE) {
+      ligthboxLib.close();
+      removeListener();
+    }
+  }
+
+  function removeListener() {
+    window.removeEventListener('keydown', onEscKeyPress);
+  }
 }
-
-function addSpecialClass() {
-  bodyRef.classList.toggle('modal-open');
-}
-
-// function isModalOpen(evt) {
-//   if (bodyRef.classList.contains('modal-open')) {
-//     bodyRef.classList.remove('modal-open');
-//   }
-// }
-
-// function isActive(boolean) {
-//   console.log(boolean);
-// }
-
-// function removeSpecialClass() {
-//   if (galleryContainer.classList.contains('modal-open')) {
-//     galleryContainer.classList.remove('modal-open');
-//   }
-// }

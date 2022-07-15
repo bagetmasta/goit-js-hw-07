@@ -6,7 +6,6 @@ const galleryContainer = document.querySelector('.gallery');
 const cardsMarkup = createCardsMarkup(galleryItems);
 
 galleryContainer.insertAdjacentHTML('beforeend', cardsMarkup);
-
 galleryContainer.addEventListener('click', onGalleryContainerClick);
 
 function createCardsMarkup(cards) {
@@ -22,8 +21,9 @@ function createCardsMarkup(cards) {
 
 function onGalleryContainerClick(evt) {
   evt.preventDefault();
-
-  const lightbox = new SimpleLightbox('.gallery a', {
-    overlay: true,
-  });
 }
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
